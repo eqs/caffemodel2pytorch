@@ -14,6 +14,10 @@ setup(
         'console_scripts': ['caffemodel2pytorch=caffemodel2pytorch.caffemodel2pytorch:main']
     }, 
 
+    install_requires=[
+        'torch>=1.0.0'
+    ], 
+
     packages=find_packages()
 )
 
