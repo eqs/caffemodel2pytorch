@@ -9,6 +9,10 @@ setup(
     author='Satoshi Murashige', 
     author_email='murashige.satoshi.mi1 [at] is.naist.jp', 
     url='https://github.com/eqs/caffemodel2pytorch', 
+    
+    entry_points={
+        'console_scripts': ['caffemodel2pytorch=caffemodel2pytorch.caffemodel2pytorch:main']
+    }, 
 
     packages=find_packages()
 )
