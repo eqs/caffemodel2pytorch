@@ -20,6 +20,12 @@ import google.protobuf.symbol_database
 import google.protobuf.text_format
 from google.protobuf.descriptor import FieldDescriptor as FD
 
+__all__ = ['initialize', 'set_mode_gpu', 'set_device', 
+           'Net', 'Blob', 'Layer', 'SGDSolver', 
+           'FunctionModule', 'CaffePythonLayerModule', 
+           'Convolution', 'InnerProduct', 'init_weight_bias', 
+           'convert_to_gpu_if_enabled', 'first_or', 'to_dict']
+
 TRAIN = 0
 
 TEST = 1
@@ -371,7 +377,7 @@ def first_or(param, key, default):
 def to_dict(obj):
 	return list(map(to_dict, obj)) if isinstance(obj, collections.Iterable) else {} if obj is None else {f.name : converter(v) if f.label != FD.LABEL_REPEATED else list(map(converter, v)) for f, v in obj.ListFields() for converter in [{FD.TYPE_DOUBLE: float, FD.TYPE_SFIXED32: float, FD.TYPE_SFIXED64: float, FD.TYPE_SINT32: int, FD.TYPE_SINT64: long, FD.TYPE_FLOAT: float, FD.TYPE_ENUM: int, FD.TYPE_UINT32: int, FD.TYPE_INT64: long, FD.TYPE_UINT64: long, FD.TYPE_INT32: int, FD.TYPE_FIXED64: float, FD.TYPE_FIXED32: float, FD.TYPE_BOOL: bool, FD.TYPE_STRING: unicode, FD.TYPE_BYTES: lambda x: x.encode('string_escape'), FD.TYPE_MESSAGE: to_dict}[f.type]]}
 
-if __name__ == '__main__':
+def main():
 	parser = argparse.ArgumentParser()
 	parser.add_argument(metavar = 'model.caffemodel', dest = 'model_caffemodel', help = 'Path to model.caffemodel')
 	parser.add_argument('-o', dest = 'output_path', help = 'Path to converted model, supported file extensions are: h5, npy, npz, json, pth')
@@ -396,3 +402,7 @@ if __name__ == '__main__':
 		(numpy.savez if args.output_path[-1] == 'z' else numpy.save)(args.output_path, **{k : numpy.array(blob['data'], dtype = numpy.float32).reshape(*blob['shape']) for k, blob in blobs.items()})
 	elif args.output_path.endswith('.pth'):
 		torch.save({k : torch.FloatTensor(blob['data']).view(*blob['shape']) for k, blob in blobs.items()}, args.output_path)
+
+if __name__ == '__main__':
+	main()
+
