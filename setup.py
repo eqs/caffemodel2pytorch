@@ -10,7 +10,6 @@ setup(
     author_email='murashige.satoshi.mi1 [at] is.naist.jp', 
     url='https://github.com/eqs/caffemodel2pytorch', 
 
-    packages=find_packages(where='caffemodel2pytorch'), 
-    package_dir={'': 'caffemodel2pytorch'}
+    packages=find_packages()
 )
 
