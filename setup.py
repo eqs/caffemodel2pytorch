@@ -15,7 +15,9 @@ setup(
     }, 
 
     install_requires=[
-        'torch>=1.0.0'
+        'numpy', 
+        'torch>=1.0.0', 
+        'tensorflow'
     ], 
 
     packages=find_packages()
