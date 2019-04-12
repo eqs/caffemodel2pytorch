@@ -1,3 +1,17 @@
+# caffemodel2pytorch
+
+This repository is a modified version of the [original repository](https://github.com/vadimkantorov/caffemodel2pytorch) 
+to install and import `caffemodel2pytorch` as a Python package.
+
+# Installation
+
+```
+$ sudo apt-get install protobuf-compiler
+$ pip install git+https://github.com/eqs/caffemodel2pytorch
+```
+
+---
+
 This converter can be useful for porting Caffe code and layers to PyTorch. Features:
 * dump caffemodel weights to hdf5, npy, pt and json formats
 * load Caffe models and use them from PyTorch
